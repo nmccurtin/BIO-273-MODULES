@@ -1,0 +1,131 @@
+---
+title: "Basics of ggplot2"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+/* latin-ext */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v14/S6uyw4BMUTPHjxAwXiWtFCfQ7A.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v14/S6uyw4BMUTPHjx4wXiWtFCc.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+p {
+  font-family: 'Lato', sans-serif;
+}
+
+h1 {
+  font-family: 'Lato', sans-serif;
+}
+
+.list {
+  font-family: 'Lato', sans-serif;
+}
+
+</style>
+</head>
+<body>
+<div class="list">
+<br>
+
+ggplot2 is a package in RStudio that focuses on aesthetics, geometry, and data. The plots produced using this package are much more pleasing to look at, compared to the basics you can make in RStudio. However, the commands are quite different, as you can remember from using the package in the plot styles module to create stacked and grouped bar plots. This information-dense [PDF](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf) breaks down ggplot2 for future reference, but in this module I will unpack this tool a little more in depth, so that a beginner in RStudio can use it without the assumption that the reader already has sound understanding of the inner workings of R codes.
+
+<br>
+
+## Quick Plot
+
+## Plot Types
+
+## Aesthetic Tools
+
+## Faceting
+
+## Statistic
+
+## Scatter plots (with simple linear regression)
+<br>
+
+**<span style="color:#e600ac">
+Any time you use the ggplot2 package, do not forget to load the ggplot2 package.</span>**
+
+<br>
+
+```
+library(ggplot2)
+```
+
+<br>
+
+
+Load your data into R and then use the skeleton of this code.
+
+<br>
+
+```
+gplot(dataset, aes(x=xvalues, y=yvalues, color=levelsnames)) + 
+  geom_point(shape=number) + scale_color_manual(values=vector) + geom_smooth(method=lm, se = FALSE, fullrange = TRUE) +
+  labs(x = "xlabel", y = "ylabel", title = "maintitle", color ="levelsnames")
+```
+
+<br>
+
+To include a specific color or range of colors, combine HTML color codes into a vector and set this equal to the values in `scale_color_manual()` code. `method=lm` puts your data into a linear model and includes the regression line of your data. Labels are simply labels.
+
+<br>
+
+```
+vector <- c("#numbers")
+```
+
+<br>
+
+Here is an example using vital capacity data!
+```{r}
+library(ggplot2)
+
+vc <- read.csv(url("https://raw.githubusercontent.com/nmccurtin/CSVfilesbiostats/master/vc%20(1).csv")) ##update this
+
+## Create a color palette! We can call this one "pal"
+
+pal <- c("#e600ac", "#e600e6", "#e60073", "#e60039")
+
+## Which will correspond to this part of your code `scale_color_manual(values=pal)`
+
+ggplot(vc, aes(height, vc, color=sex)) + geom_point() + scale_color_manual(values=pal) + geom_smooth(method = lm, se = FALSE) + labs(x = "Height (in)", y = "Vital Capacity (mL)", title = "Vital Capacity Data of BIO-204", color ="Sex") +  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 20))
+
+```
+
+<br>
+
+<ul>Extra, but if you want to:<br>
+<li>center your title, use this command `hjust = 0.5`</li>
+<li>edit font size, `size = n`</li>
+<li>font style `face="bold/italic/etc"`</li>
+</ul>
+
+<br>
+
+
+
+</div>
+</body>
+</html>
